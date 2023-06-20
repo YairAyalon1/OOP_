@@ -1,11 +1,14 @@
-﻿// Written by: Yair Ayalon
+// Written by: Yair Ayalon
 // Date: 27/5/23
 // This project combines between OOP (using a header file and a source file where all the methods are defined) to Threads and program efficiency.
 // The program compare between using 0 / 1 / 2 /5 threads to execute some orders and the performance of the program is changed according to the amount of
 // for loops in the functions definition before the main() function.
+// Extra components: circle area and permiter calculation + quadratic equation calculation
 
 #include <iostream>
 #include "Calculator.h"
+#include "QuadraticEquation.h"
+#include "CircleAreaPerimeter.h"
 #include <chrono>
 #include <thread>
 
@@ -208,10 +211,25 @@ void executionWith1Threads(double number1, double number2, int amountOfIteration
 	Thread1.join();
 }
 
+void quadraticEquationCalculator(double x, double y, double z) {
+	Quadratic_Equation<double> myObj1(x, y, z);
+	cout << "The solutions for the quadratic eauation are: \n";
+	cout << "x1 = " << myObj1.x1_calc() << endl;
+	cout << "x2 = " << myObj1.x2_calc() << endl;
+}
+
+void circleAreaPerimeterCalc(double r) {
+	CircleAreaPerimeter<double> myObj1(r);
+	cout << "The circle area: " << myObj1.area_calc() << endl;
+	cout << "The circle permiteter: " << myObj1.perimeter_calc() << endl;
+}
+
 int main() {
 
 	double number1, number2;
+	double R;
 	int amountOfIterations;
+	double a, b, c;
 	cout << "Please enter the required amount of iterations to check the thread performance: ";
 	cin >> amountOfIterations;
 	cout << "Please enter the first number x: ";
@@ -256,6 +274,25 @@ int main() {
 	cout << "Execution time with 5 threads: " << elapsed_seconds1.count() << " seconds." << std::endl; // Output the elapsed time
 	cout << "Execution time with 2 threads: " << elapsed_seconds2.count() << " seconds." << std::endl; // Output the elapsed time
 	cout << "Execution time with 1 threads: " << elapsed_seconds3.count() << " seconds." << std::endl; // Output the elapsed time
+
+	// Quadratic_Equation testing
+	cout << "--------------------------------------------\n";
+	cout << "This program calculated the results of a quadratic equation.\n";
+	cout << "Please enter the required values of the variables a, b, and c.\n";
+	cout << "a = ";
+	cin >> a;
+	cout << "b = ";
+	cin >> b;
+	cout << "c = ";
+	cin >> c;
+	quadraticEquationCalculator(a, b, c);
+
+	// Circle area and perimeter calculation
+	cout << "--------------------------------------------\n";
+	cout << "This program calculated the area and perimeter of a circle according a given radius.\n";
+	cout << "Please enter the radius of the circle (m): ";
+	cin >> R;
+	circleAreaPerimeterCalc(R);
 
 	return 0;
 }
