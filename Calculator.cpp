@@ -4,6 +4,10 @@ template <class T>
 basic_instructions<T>::basic_instructions(T x, T y) {
     num1 = x;
     num2 = y;
+    sum = 0;
+    substruct = 0;
+    multiply = 0;
+    deviation = 0;
 }
 
 template <class T>
